@@ -1,28 +1,23 @@
-<h2 align="left">Hi 👋!  I'm Romandev.</h2>
+<h1 align="center">Hola, soy Roman 👋</h1>
 
-###
+<p align="center">🦀 Rust enthusiast & TS enjoyer &nbsp;·&nbsp; 🔧 core-maintainer de un par de herramientas open source &nbsp;·&nbsp; 🐹 fan de los capybaras</p>
 
-<p align="left">🚀 Rust enthusiastic & TS enjoyer.<br>⚡ Creating Solutions on a global scale.<br>😴 Fighting against procastination.<br><br>💖 Fun fact: I love capybaras.</p>
-
-###
+<br clear="both">
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=romancitodev&hide_title=true&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=tokyonight&locale=en&hide_border=true" height="150" alt="stats graph"  />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=romancitodev&locale=en&hide_title=true&layout=compact&card_width=320&langs_count=5&theme=tokyonight&hide_border=true&custom_title=Loved%20Languages" height="150" alt="languages graph"  />
+
+### 🛠️ Cosas que mantengo
+
+| Proyecto | Qué hace | |
+|---|---|---|
+| [**cargo-pretty**](https://github.com/romancitodev/cargo-pretty) | Wrapper de `cargo build` con una vista de estado animada en vivo | ⭐ 217 |
+| [**nobubbles**](https://github.com/romancitodev/nobubbles) | Framework de TUI chiquito y poderoso, escrito en Rust | ⭐ 24 |
+| [**devconf**](https://github.com/romancitodev/devconf) | Lenguaje de configuración con templates e interpolación de entorno | ⭐ 12 |
+| [**simple-commits**](https://github.com/romancitodev/simple-commits) | CLI para convertir commits sucios en conventional commits | ⭐ 12 |
+
 </div>
 
-###
-
-<img align="left" height="150" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHY0aWQxMG5pNTk0dmkwd3JjZnRnc2o0MDNjZDdycnFzOHdzZGV5ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AQpUsaKCRD9gA/giphy.webp"  />
-
-###
-
-<div align="center">
-  <img src="https://img.shields.io/static/v1?message=Twitch&logo=twitch&label=&color=9146FF&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="twitch logo"  />
-  <img src="https://img.shields.io/static/v1?message=Discord&logo=discord&label=&color=7289DA&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="discord logo"  />
-</div>
-
-###
+<br>
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=rust" height="30" alt="rust logo"  />
@@ -56,10 +51,8 @@
   <img src="https://skillicons.dev/icons?i=nodejs" height="30" alt="nodejs logo"  />
 </div>
 
-###
-
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/romancitodev/romancitodev/output/snake.svg" alt="Snake animation" />
-
-###
+<div align="center">
+  <img src="https://raw.githubusercontent.com/romancitodev/romancitodev/output/snake.svg" alt="Snake animation" />
+</div>
