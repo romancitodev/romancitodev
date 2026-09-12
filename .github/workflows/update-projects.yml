@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       repos:
-        description: "Comma-separated repo names to feature (leave empty to auto-pick by stars)"
+        description: "Comma-separated repo names to pin (leave empty to keep the current pin, 'auto' to clear it and go back to auto-pick by stars)"
         required: false
         default: ""
       count:
@@ -24,10 +24,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve pinned repos
+        env:
+          INPUT_REPOS: ${{ github.event.inputs.repos || '' }}
+        run: |
+          CONFIG=.github/featured-repos.txt
+          touch "$CONFIG"
+
+          if [ "$INPUT_REPOS" = "auto" ]; then
+            : > "$CONFIG"
+          elif [ -n "$INPUT_REPOS" ]; then
+            echo "$INPUT_REPOS" > "$CONFIG"
+          fi
+
+          echo "REPOS=$(cat "$CONFIG")" >> "$GITHUB_ENV"
+
       - name: Fetch repo stats
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOS: ${{ github.event.inputs.repos || '' }}
           COUNT: ${{ github.event.inputs.count || '4' }}
         run: |
           cat > query.graphql <<'EOF'
@@ -100,6 +114,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ReadMe.md
+          git add ReadMe.md .github/featured-repos.txt
           git diff --cached --quiet || git commit -m "🔖 chore: refresh featured projects table"
           git push
