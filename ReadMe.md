@@ -1,19 +1,21 @@
-<h1 align="center">Hola, soy Roman 👋</h1>
+<h1 align="center">Hi, I'm Roman 👋</h1>
 
-<p align="center">🦀 Rust enthusiast & TS enjoyer &nbsp;·&nbsp; 🔧 core-maintainer de un par de herramientas open source &nbsp;·&nbsp; 🐹 fan de los capybaras</p>
+<p align="center">🦀 Rust enthusiast & TS enjoyer &nbsp;·&nbsp; 🔧 core-maintainer of a few open source tools &nbsp;·&nbsp; 🐹 capybara fan</p>
 
 <br clear="both">
 
 <div align="center">
 
-### 🛠️ Cosas que mantengo
+### 🛠️ Things I maintain
 
-| Proyecto | Qué hace | |
-|---|---|---|
-| [**cargo-pretty**](https://github.com/romancitodev/cargo-pretty) | Wrapper de `cargo build` con una vista de estado animada en vivo | ⭐ 217 |
-| [**nobubbles**](https://github.com/romancitodev/nobubbles) | Framework de TUI chiquito y poderoso, escrito en Rust | ⭐ 24 |
-| [**devconf**](https://github.com/romancitodev/devconf) | Lenguaje de configuración con templates e interpolación de entorno | ⭐ 12 |
-| [**simple-commits**](https://github.com/romancitodev/simple-commits) | CLI para convertir commits sucios en conventional commits | ⭐ 12 |
+<!-- projects:start -->
+| Project | What it does | | |
+|---|---|---|---|
+| [**cargo-pretty**](https://github.com/romancitodev/cargo-pretty) | A `cargo build` wrapper with a live, animated status view | ⭐ 217 | 🔨 33 |
+| [**nobubbles**](https://github.com/romancitodev/nobubbles) | A powerful little TUI framework, written in Rust | ⭐ 24 | 🔨 82 |
+| [**devconf**](https://github.com/romancitodev/devconf) | A configuration language with templates and environment interpolation | ⭐ 12 | 🔨 32 |
+| [**simple-commits**](https://github.com/romancitodev/simple-commits) | A CLI that turns dirty commits into conventional ones | ⭐ 12 | 🔨 136 |
+<!-- projects:end -->
 
 </div>
 
