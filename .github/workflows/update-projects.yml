@@ -1,0 +1,105 @@
+name: Update featured projects
+
+on:
+  schedule: # execute every day
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      repos:
+        description: "Comma-separated repo names to feature (leave empty to auto-pick by stars)"
+        required: false
+        default: ""
+      count:
+        description: "How many top-starred repos to show when 'repos' is empty"
+        required: false
+        default: "4"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch repo stats
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOS: ${{ github.event.inputs.repos || '' }}
+          COUNT: ${{ github.event.inputs.count || '4' }}
+        run: |
+          cat > query.graphql <<'EOF'
+          query($login: String!) {
+            user(login: $login) {
+              repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {field: STARGAZERS, direction: DESC}) {
+                nodes {
+                  name
+                  url
+                  description
+                  isArchived
+                  stargazerCount
+                  defaultBranchRef {
+                    target {
+                      ... on Commit {
+                        history { totalCount }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          EOF
+
+          gh api graphql -F query=@query.graphql -f login="${{ github.repository_owner }}" > raw.json
+
+          cat > select.jq <<'EOF'
+          if (env.REPOS // "" | length) > 0 then
+            (env.REPOS | split(",") | map(gsub("^\\s+|\\s+$";""))) as $names
+            | [.data.user.repositories.nodes[] | select(.isArchived == false) | select(.name as $n | $names | index($n))]
+          else
+            [.data.user.repositories.nodes[] | select(.isArchived == false)] | .[:(env.COUNT | tonumber)]
+          end
+          EOF
+
+          jq -f select.jq raw.json > top-repos.json
+
+      - name: Update README table
+        run: |
+          {
+            echo "| Project | What it does | | |"
+            echo "|---|---|---|---|"
+            jq -r '.[] | "| [**\(.name)**](\(.url)) | \(.description // "") | ⭐ \(.stargazerCount) | 🔨 \(.defaultBranchRef.target.history.totalCount // 0) |"' top-repos.json
+          } > table.md
+
+          python3 - <<'EOF'
+          import re
+
+          with open("table.md") as f:
+              table = f.read().rstrip("\n")
+
+          with open("ReadMe.md") as f:
+              content = f.read()
+
+          content = re.sub(
+              r"<!-- projects:start -->\n.*?\n<!-- projects:end -->",
+              "<!-- projects:start -->\n" + table + "\n<!-- projects:end -->",
+              content,
+              flags=re.DOTALL,
+          )
+
+          with open("ReadMe.md", "w") as f:
+              f.write(content)
+          EOF
+
+          rm query.graphql raw.json select.jq top-repos.json table.md
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ReadMe.md
+          git diff --cached --quiet || git commit -m "🔖 chore: refresh featured projects table"
+          git push
