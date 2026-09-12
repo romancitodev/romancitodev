@@ -39,6 +39,16 @@ jobs:
 
           echo "REPOS=$(cat "$CONFIG")" >> "$GITHUB_ENV"
 
+      - name: Commit pin change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/featured-repos.txt
+          if ! git diff --cached --quiet; then
+            git commit -m "🔖 chore: update pinned featured repos"
+            git push
+          fi
+
       - name: Fetch repo stats
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,10 +64,13 @@ jobs:
                   description
                   isArchived
                   stargazerCount
+                  forkCount
                   defaultBranchRef {
                     target {
                       ... on Commit {
+                        committedDate
                         history { totalCount }
+                        statusCheckRollup { state }
                       }
                     }
                   }
@@ -80,40 +93,20 @@ jobs:
 
           jq -f select.jq raw.json > top-repos.json
 
-      - name: Update README table
+      - name: Render projects.svg
         run: |
-          {
-            echo "| Project | What it does | | |"
-            echo "|---|---|---|---|"
-            jq -r '.[] | "| [**\(.name)**](\(.url)) | \(.description // "") | ⭐ \(.stargazerCount) | 🔨 \(.defaultBranchRef.target.history.totalCount // 0) |"' top-repos.json
-          } > table.md
+          mkdir -p dist
+          python3 .github/scripts/render_projects_svg.py top-repos.json > dist/projects.svg
+          rm query.graphql raw.json select.jq top-repos.json
 
-          python3 - <<'EOF'
-          import re
-
-          with open("table.md") as f:
-              table = f.read().rstrip("\n")
-
-          with open("ReadMe.md") as f:
-              content = f.read()
-
-          content = re.sub(
-              r"<!-- projects:start -->\n.*?\n<!-- projects:end -->",
-              "<!-- projects:start -->\n" + table + "\n<!-- projects:end -->",
-              content,
-              flags=re.DOTALL,
-          )
-
-          with open("ReadMe.md", "w") as f:
-              f.write(content)
-          EOF
-
-          rm query.graphql raw.json select.jq top-repos.json table.md
-
-      - name: Commit changes
+      - name: Push projects.svg to the output branch
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ReadMe.md .github/featured-repos.txt
-          git diff --cached --quiet || git commit -m "🔖 chore: refresh featured projects table"
-          git push
+          git fetch origin output
+          git worktree add /tmp/output-branch origin/output
+          cp dist/projects.svg /tmp/output-branch/projects.svg
+          cd /tmp/output-branch
+          git add projects.svg
+          git diff --cached --quiet || git commit -m "🔖 chore: refresh projects card"
+          git push origin HEAD:output
+          cd "$GITHUB_WORKSPACE"
+          git worktree remove /tmp/output-branch --force

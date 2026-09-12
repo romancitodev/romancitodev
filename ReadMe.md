@@ -5,18 +5,7 @@
 <br clear="both">
 
 <div align="center">
-
-### 🛠️ Things I maintain
-
-<!-- projects:start -->
-| Project | What it does | | |
-|---|---|---|---|
-| [**cargo-pretty**](https://github.com/romancitodev/cargo-pretty) | A cargo build wrapper with a live, animated status view | ⭐ 218 | 🔨 33 |
-| [**nobubbles**](https://github.com/romancitodev/nobubbles) | A powerful little TUI framework 🏗 (Written in Rust obviously) | ⭐ 24 | 🔨 82 |
-| [**devconf**](https://github.com/romancitodev/devconf) | 🚀 Modern configuration language with templates, environment interpolation & dot notation. | ⭐ 12 | 🔨 32 |
-| [**simple-commits**](https://github.com/romancitodev/simple-commits) | A little CLI written in rust to improve your dirty commits into conventional ones. | ⭐ 12 | 🔨 136 |
-<!-- projects:end -->
-
+  <img src="https://raw.githubusercontent.com/romancitodev/romancitodev/output/projects.svg" alt="Featured projects" />
 </div>
 
 <br>
