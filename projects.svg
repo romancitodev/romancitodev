@@ -1,0 +1,37 @@
+<svg width="760" height="312" viewBox="0 0 760 312" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" font-family="'Segoe UI', Ubuntu, Sans-Serif">
+  <style>
+    .bg { fill: #161b22; }
+    .title { fill: #58a6ff; font-size: 16px; font-weight: 600; }
+    .name { fill: #c9d1d9; font-size: 14px; font-weight: 600; }
+    .desc { fill: #8b949e; font-size: 12px; }
+    .stat { fill: #c9d1d9; font-size: 13px; }
+    .divider { stroke: #30363d; stroke-width: 1; }
+  </style>
+  <rect class="bg" x="0" y="0" width="760" height="312" rx="12" />
+  <text x="24" y="34" class="title">🛠️ Things I maintain</text>
+  <line class="divider" x1="24" y1="48" x2="736" y2="48" />
+  <a xlink:href="https://github.com/romancitodev/cargo-pretty" target="_blank">
+    <text x="24" y="80" class="name">🟢 cargo-pretty</text>
+  </a>
+  <text x="24" y="98" class="desc">A cargo build wrapper with a live, animated status view</text>
+  <text x="736" y="80" text-anchor="end" class="stat">⭐ 309   🍴 2</text>
+  <text x="736" y="98" text-anchor="end" class="stat">🔨 47   🕒 8d ago</text>
+  <a xlink:href="https://github.com/romancitodev/nobubbles" target="_blank">
+    <text x="24" y="140" class="name">nobubbles</text>
+  </a>
+  <text x="24" y="158" class="desc">A powerful little TUI framework 🏗 (Written in Rust obviousl…</text>
+  <text x="736" y="140" text-anchor="end" class="stat">⭐ 34   🍴 0</text>
+  <text x="736" y="158" text-anchor="end" class="stat">🔨 82   🕒 2mo ago</text>
+  <a xlink:href="https://github.com/romancitodev/simple-commits" target="_blank">
+    <text x="24" y="200" class="name">🟢 simple-commits</text>
+  </a>
+  <text x="24" y="218" class="desc">A little CLI written in rust to improve your dirty commits…</text>
+  <text x="736" y="200" text-anchor="end" class="stat">⭐ 13   🍴 5</text>
+  <text x="736" y="218" text-anchor="end" class="stat">🔨 143   🕒 1mo ago</text>
+  <a xlink:href="https://github.com/romancitodev/devconf" target="_blank">
+    <text x="24" y="260" class="name">devconf</text>
+  </a>
+  <text x="24" y="278" class="desc">🚀 Modern configuration language with templates, environment…</text>
+  <text x="736" y="260" text-anchor="end" class="stat">⭐ 12   🍴 0</text>
+  <text x="736" y="278" text-anchor="end" class="stat">🔨 32   🕒 1y ago</text>
+</svg>
